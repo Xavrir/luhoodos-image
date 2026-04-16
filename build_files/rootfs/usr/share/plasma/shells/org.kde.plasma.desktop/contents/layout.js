@@ -11,9 +11,18 @@ topBar.location = "top";
 topBar.height = 2 * Math.ceil(gridUnit * 1.6 / 2);
 topBar.floating = false;
 
-topBar.addWidget("org.kde.plasma.kickoff");
-topBar.addWidget("org.kde.plasma.panelspacer");
-topBar.addWidget("org.kde.plasma.panelspacer");
+const topLauncher = topBar.addWidget("org.kde.plasma.kickoff");
+topLauncher.currentConfigGroup = ["General"];
+topLauncher.writeConfig("icon", "start-here-symbolic");
+
+const leftSpacer = topBar.addWidget("org.kde.plasma.panelspacer");
+leftSpacer.currentConfigGroup = ["Configuration", "General"];
+leftSpacer.writeConfig("expanding", true);
+
+const rightSpacer = topBar.addWidget("org.kde.plasma.panelspacer");
+rightSpacer.currentConfigGroup = ["Configuration", "General"];
+rightSpacer.writeConfig("expanding", true);
+
 topBar.addWidget("org.kde.plasma.systemtray");
 topBar.addWidget("org.kde.plasma.digitalclock");
 
@@ -24,12 +33,14 @@ dock.floating = true;
 dock.alignment = "center";
 dock.hiding = "dodgewindows";
 
-const kickoff = dock.addWidget("org.kde.plasma.kickoff");
-kickoff.currentConfigGroup = ["General"];
-kickoff.writeConfig("icon", "start-here-kde");
+const geo = screenGeometry(dock.screen);
+const dockWidth = Math.min(Math.round(geo.width * 0.42), Math.round(geo.height * 1.9));
+dock.minimumLength = dockWidth;
+dock.maximumLength = dockWidth;
 
 const tasks = dock.addWidget("org.kde.plasma.icontasks");
 tasks.currentConfigGroup = ["General"];
+tasks.writeConfig("fill", false);
 tasks.writeConfig("launchers", [
     "applications:org.kde.dolphin.desktop",
     "applications:org.chromium.Chromium.desktop",
