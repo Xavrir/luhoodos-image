@@ -1,0 +1,7 @@
+.git
+_build
+output
+cosign.key
+*.qcow2
+*.raw
+*.iso

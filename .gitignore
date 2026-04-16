@@ -1,0 +1,6 @@
+cosign.key
+*.qcow2
+*.raw
+*.iso
+dist/
+tmp/
