@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3840 2160" role="img" aria-label="LuhoodOS wallpaper">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b1020" />
+      <stop offset="45%" stop-color="#111a33" />
+      <stop offset="100%" stop-color="#1d2547" />
+    </linearGradient>
+    <radialGradient id="glowA" cx="25%" cy="18%" r="55%">
+      <stop offset="0%" stop-color="#88d6ff" stop-opacity="0.50" />
+      <stop offset="55%" stop-color="#88d6ff" stop-opacity="0.10" />
+      <stop offset="100%" stop-color="#88d6ff" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="glowB" cx="78%" cy="80%" r="45%">
+      <stop offset="0%" stop-color="#ffc88a" stop-opacity="0.22" />
+      <stop offset="60%" stop-color="#ffc88a" stop-opacity="0.06" />
+      <stop offset="100%" stop-color="#ffc88a" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#7bdcff" stop-opacity="0" />
+      <stop offset="50%" stop-color="#7bdcff" stop-opacity="0.55" />
+      <stop offset="100%" stop-color="#7bdcff" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+
+  <rect width="3840" height="2160" fill="url(#bg)" />
+  <rect width="3840" height="2160" fill="url(#glowA)" />
+  <rect width="3840" height="2160" fill="url(#glowB)" />
+
+  <g fill="none" stroke="url(#line)" stroke-width="6">
+    <path d="M-160 1460C420 1080 980 1040 1560 1360S2700 1820 4000 1260" />
+    <path d="M-120 1580C480 1180 1000 1160 1540 1460S2700 1900 3980 1390" opacity="0.55" />
+    <path d="M-180 1320C360 980 940 940 1490 1230S2660 1700 3990 1120" opacity="0.28" />
+  </g>
+
+  <g fill="none" stroke="#ffffff" stroke-opacity="0.08">
+    <circle cx="580" cy="520" r="300" stroke-width="2" />
+    <circle cx="580" cy="520" r="420" stroke-width="1.5" />
+    <circle cx="3040" cy="1620" r="220" stroke-width="2" />
+    <circle cx="3040" cy="1620" r="340" stroke-width="1.5" />
+  </g>
+
+  <g transform="translate(420 1660)">
+    <rect x="0" y="0" width="760" height="6" rx="3" fill="#88d6ff" fill-opacity="0.35" />
+    <rect x="0" y="26" width="420" height="6" rx="3" fill="#88d6ff" fill-opacity="0.20" />
+  </g>
+</svg>

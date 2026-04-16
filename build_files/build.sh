@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euxo pipefail
 
+cp -a /tmp/build_files/rootfs/. /
+
 install -d /usr/share/luhoodos
 
 cat > /usr/share/luhoodos/manifest.json <<'EOF'
@@ -33,7 +35,6 @@ cat > /usr/share/luhoodos/next-steps.txt <<'EOF'
 LuhoodOS image scaffold installed.
 
 Next implementation tasks:
-- add LuhoodOS KDE shell defaults
 - add Standard and NVIDIA image split
 - add onboarding and Luhood Control
 - validate bootc switch/rebase on a test system

@@ -17,6 +17,7 @@ The goal of this scaffold is to prove the new delivery model:
 
 - `Containerfile` using `kinoite-main`
 - minimal `build.sh` that stamps LuhoodOS metadata into the image
+- first-pass Plasma shell defaults for new users
 - simple `Justfile` for local container builds
 - Docker fallback script for local builds on non-uBlue hosts
 - example GitHub Actions workflow stubs for image and disk-image builds
@@ -25,7 +26,7 @@ The goal of this scaffold is to prove the new delivery model:
 ## What Still Needs Work
 
 - real package and Flatpak decisions
-- KDE branding and shell defaults
+- deeper KDE branding and shell defaults
 - Standard and NVIDIA image split
 - signing secrets
 - disk image builder wiring

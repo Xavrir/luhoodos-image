@@ -12,3 +12,4 @@ and this project aims to follow [Semantic Versioning](https://semver.org/spec/v2
 - Initial LuhoodOS Atomic image scaffold based on `uBlue kinoite-main`
 - Containerfile, local build helper, and workflow stubs
 - LuhoodOS implementation docs and Phase 1 bootstrap structure
+- First-pass KDE Plasma shell defaults for new users
