@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=LuhoodOS Welcome
+Exec=/usr/bin/luhood-welcome
+OnlyShowIn=KDE;
+X-KDE-AutostartScript=true
+NoDisplay=true

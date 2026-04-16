@@ -1,0 +1,16 @@
+{
+  "KPackageStructure": "Plasma/LookAndFeel",
+  "KPlugin": {
+    "Id": "org.luhoodos.desktop",
+    "Name": "LuhoodOS",
+    "Description": "LuhoodOS look and feel",
+    "Authors": [
+      {
+        "Name": "LuhoodOS",
+        "Email": "replace@example.com"
+      }
+    ],
+    "License": "MIT",
+    "Version": "1.0"
+  }
+}

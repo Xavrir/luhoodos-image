@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+marker_dir="${HOME}/.config/luhoodos"
+marker_file="${marker_dir}/welcome-shown"
+
+mkdir -p "${marker_dir}"
+
+if [ -e "${marker_file}" ]; then
+  exit 0
+fi
+
+touch "${marker_file}"
+exec plasma-welcome --pages 01-LuhoodWelcome.qml,02-GamingReady.qml

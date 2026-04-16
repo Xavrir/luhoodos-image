@@ -6,7 +6,7 @@ import org.kde.plasma.welcome
 
 GenericPage {
     heading: i18nc("@info:window", "Gaming comes first")
-    description: i18nc("@info:usagetip", "Steam and Chromium are already part of the base plan. LuhoodOS is being shaped around safe updates, rollback, and hardware-specific images rather than endless manual tweaking.")
+    description: i18nc("@info:usagetip", "This welcome flow is intentionally Luhood-only. Steam is already part of the base image, while Heroic, Lutris, Discord, and OBS are meant to be optional next steps instead of cluttering the desktop by default.")
 
     ColumnLayout {
         anchors.centerIn: parent
@@ -26,7 +26,7 @@ GenericPage {
                 }
 
                 QQC2.Label {
-                    text: i18nc("@info:usagetip", "- Steam preinstalled\n- Chromium default browser\n- Heroic, Lutris, Discord, and OBS recommended during onboarding\n- Atomic rollback-first image model")
+                    text: i18nc("@info:usagetip", "- Steam preinstalled\n- Chromium default browser\n- Heroic, Lutris, Discord, and OBS recommended later\n- Atomic rollback-first image model\n- Separate Standard and NVIDIA image plan")
                     wrapMode: Text.WordWrap
                 }
             }

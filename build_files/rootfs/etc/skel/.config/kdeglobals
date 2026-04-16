@@ -1,8 +1,13 @@
 [KDE]
+LookAndFeelPackage=org.luhoodos.desktop
 SingleClick=false
+WelcomeShown=true
 
 [Icons]
 Theme=breeze-dark
 
 [General]
 ColorScheme=BreezeDark
+
+[KSplash]
+Theme=org.luhoodos.desktop

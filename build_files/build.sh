@@ -3,6 +3,9 @@ set -euxo pipefail
 
 cp -a /tmp/build_files/rootfs/. /
 
+install -d /usr/share/plasma/look-and-feel/org.luhoodos.desktop/contents/splash/images
+cp /usr/share/plasma/look-and-feel/org.fedoraproject.fedoradark.desktop/contents/splash/images/busywidget.svgz /usr/share/plasma/look-and-feel/org.luhoodos.desktop/contents/splash/images/busywidget.svgz
+
 install -d /usr/share/luhoodos
 
 cat > /usr/share/luhoodos/manifest.json <<'EOF'
