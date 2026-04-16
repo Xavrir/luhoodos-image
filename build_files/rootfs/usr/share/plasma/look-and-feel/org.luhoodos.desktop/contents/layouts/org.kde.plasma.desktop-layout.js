@@ -8,12 +8,12 @@ for (const desktop of desktops()) {
 
 const topBar = new Panel;
 topBar.location = "top";
-topBar.height = 2 * Math.ceil(gridUnit * 1.6 / 2);
+topBar.height = Math.round(gridUnit * 1.55);
 topBar.floating = false;
 
-const topLauncher = topBar.addWidget("org.kde.plasma.kickerdash");
-topLauncher.currentConfigGroup = ["General"];
-topLauncher.writeConfig("icon", "start-here-luhoodos");
+const launcher = topBar.addWidget("org.kde.plasma.kickerdash");
+launcher.currentConfigGroup = ["General"];
+launcher.writeConfig("icon", "start-here-luhoodos");
 
 const leftSpacer = topBar.addWidget("org.kde.plasma.panelspacer");
 leftSpacer.currentConfigGroup = ["Configuration", "General"];
@@ -28,17 +28,20 @@ topBar.addWidget("org.kde.plasma.digitalclock");
 
 const dock = new Panel;
 dock.location = "bottom";
-dock.height = 2 * Math.ceil(gridUnit * 2.4 / 2);
+dock.height = Math.round(gridUnit * 2.5);
 dock.floating = true;
 dock.alignment = "center";
-const geo = screenGeometry(dock.screen);
-const dockWidth = Math.min(Math.round(geo.width * 0.34), Math.round(geo.height * 1.7));
+
+const geometry = screenGeometry(dock.screen);
+const dockWidth = Math.min(Math.round(geometry.width * 0.34), Math.round(geometry.height * 1.7));
 dock.minimumLength = dockWidth;
 dock.maximumLength = dockWidth;
 
 const tasks = dock.addWidget("org.kde.plasma.icontasks");
 tasks.currentConfigGroup = ["General"];
 tasks.writeConfig("fill", false);
+tasks.writeConfig("groupInline", true);
+tasks.writeConfig("iconSpacing", 6);
 tasks.writeConfig("launchers", [
     "applications:org.kde.dolphin.desktop",
     "applications:org.chromium.Chromium.desktop",
