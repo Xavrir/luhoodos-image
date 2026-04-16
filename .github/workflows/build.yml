@@ -12,6 +12,7 @@ on:
 
 env:
   IMAGE_NAME: luhoodos
+  IMAGE_REGISTRY: ghcr.io/${{ github.repository_owner }}
   DEFAULT_TAG: latest
 
 jobs:
@@ -22,6 +23,11 @@ jobs:
       packages: write
       id-token: write
     steps:
+      - name: Prepare environment
+        run: |
+          echo "IMAGE_REGISTRY=${IMAGE_REGISTRY,,}" >> ${GITHUB_ENV}
+          echo "IMAGE_NAME=${IMAGE_NAME,,}" >> ${GITHUB_ENV}
+
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -38,9 +44,9 @@ jobs:
           context: .
           file: ./Containerfile
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:latest
+          tags: ${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}
 
       - name: Smoke test LuhoodOS metadata
         run: |
-          docker run --rm ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }} cat /usr/share/luhoodos/manifest.json
-          docker run --rm ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }} cat /usr/share/luhoodos/onboarding-defaults.json
+          docker run --rm ${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }} cat /usr/share/luhoodos/manifest.json
+          docker run --rm ${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }} cat /usr/share/luhoodos/onboarding-defaults.json
