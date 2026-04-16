@@ -54,7 +54,9 @@ Add the private key contents to the GitHub Actions secret:
 
 - `SIGNING_SECRET`
 
-Commit the public key file if you want users to verify signatures later.
+Commit the public key file as `cosign.pub` so users can verify signatures later.
+
+The image build workflow is already wired to sign automatically when `SIGNING_SECRET` exists.
 
 ## 5. First Build
 

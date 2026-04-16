@@ -70,6 +70,7 @@ IMAGE_NAME=luhoodos IMAGE_TAG=latest ./scripts/verify-image-metadata.sh
 - `REPO_SETUP.md` - extraction and GitHub setup checklist
 - `artifacthub-repo.yml` - Artifact Hub publisher metadata
 - `LICENSE` - standalone repo license file
+- `cosign.pub` - public key for image signature verification after setup
 
 ## Layout
 
