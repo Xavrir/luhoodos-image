@@ -1,0 +1,11 @@
+FROM ghcr.io/ublue-os/silverblue-main:latest
+
+LABEL org.opencontainers.image.title="LuhoodOS GNOME Prototype"
+LABEL org.opencontainers.image.description="LuhoodOS Atomic GNOME WhiteSur prototype"
+LABEL org.opencontainers.image.vendor="LuhoodOS"
+
+COPY build_files /tmp/build_files
+
+RUN bash /tmp/build_files/build.sh && rm -rf /tmp/build_files
+
+RUN bootc container lint

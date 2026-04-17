@@ -20,6 +20,7 @@ The goal of this scaffold is to prove the new delivery model:
 - `Containerfile` using `kinoite-main`
 - minimal `build.sh` that stamps LuhoodOS metadata into the image
 - first-pass Plasma shell defaults for new users
+- a parallel `gnome/` prototype path for testing `silverblue-main` + WhiteSur
 - simple `Justfile` for local container builds
 - Docker fallback script for local builds on non-uBlue hosts
 - example GitHub Actions workflow stubs for image and disk-image builds
@@ -60,6 +61,12 @@ On a host with Docker only:
 
 ```bash
 ./scripts/build-local-docker.sh
+```
+
+For the GNOME + WhiteSur prototype:
+
+```bash
+./scripts/build-local-docker-gnome.sh
 ```
 
 To verify an already-built image manually:
