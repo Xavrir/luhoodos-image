@@ -2,7 +2,9 @@
 
 This directory is the Phase 1 bootstrap for the Atomic side of LuhoodOS.
 
-It is already structured like a standalone `uBlue`-style image repository and should be extracted into its own GitHub repository as the next major step.
+It is structured like a standalone `uBlue`-style image repository and is now mirrored to `github.com/Xavrir/luhoodos-image`.
+
+![LuhoodOS preview](build_files/rootfs/usr/share/luhoodos/assets/gemini-luhood-welcome.png)
 
 ## Current Goal
 
@@ -34,7 +36,7 @@ The goal of this scaffold is to prove the new delivery model:
 
 ## Suggested Next Step
 
-Move this directory into a dedicated GitHub repo and enable Actions there.
+Keep iterating on the standalone image repo and use this local directory as the working clone.
 
 Then:
 
