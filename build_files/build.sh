@@ -1,32 +1,53 @@
 #!/usr/bin/env bash
 set -euxo pipefail
 
-cp -a /tmp/build_files/rootfs/. /
+# ──────────────────────────────────────────────────────────────────────────────
+# PHASE 1: Install packages BEFORE overwriting os-release
+# (our custom os-release sets VERSION_ID=1.0 which breaks Fedora repo URLs)
+# ──────────────────────────────────────────────────────────────────────────────
 
-# Remove broken third-party repos (base image resolves $releasever as 1.0)
+# Remove broken third-party repos that reference $releasever
 rm -f /etc/yum.repos.d/_copr_ublue-os-akmods.repo
 rm -f /etc/yum.repos.d/negativo17-fedora-multimedia.repo
 rm -f /etc/yum.repos.d/fedora-cisco-openh264.repo
 
-# Install WhiteSur + macOS feel dependencies. rpm-ostree here may fail on
-# base images where the Fedora release metadata cannot resolve $releasever;
-# the theming below works without these, so treat them as best-effort.
+# Install dependencies while os-release still says Fedora 43
 rpm-ostree install -y \
   kvantum kvantum-qt6 \
   sassc dialog git \
-  appmenu-gtk3-module libdbusmenu libdbusmenu-gtk3 \
   plymouth-plugin-script \
-  || echo "rpm-ostree install skipped; continuing without optional theming packages"
+  || echo "WARNING: rpm-ostree install had errors; continuing"
 
-# Install WhiteSur Global Theme, Kvantum Theme, and Aurorae (dark variant)
+# ──────────────────────────────────────────────────────────────────────────────
+# PHASE 2: Install WhiteSur theming (git clones, no rpm-ostree needed)
+# ──────────────────────────────────────────────────────────────────────────────
+
+# WhiteSur KDE: Global Theme, Kvantum, Aurorae, color schemes
 git clone --depth=1 https://github.com/vinceliuice/WhiteSur-kde.git /tmp/WhiteSur-kde
+# Install SYSTEM-WIDE for all users (not into $HOME)
+export HOME=/tmp/whitesur-home && mkdir -p "$HOME"
 bash /tmp/WhiteSur-kde/install.sh -c dark
+# Copy from temp home to system-wide locations
+cp -r /tmp/whitesur-home/.local/share/aurorae /usr/share/aurorae 2>/dev/null || true
+cp -r /tmp/whitesur-home/.local/share/plasma /usr/share/plasma-whitesur-merge 2>/dev/null || true
+cp -r /tmp/whitesur-home/.local/share/color-schemes/* /usr/share/color-schemes/ 2>/dev/null || true
+# Also try the --global path if the installer supports it
+if [ -d /tmp/whitesur-home/.local/share/plasma/look-and-feel ]; then
+  cp -r /tmp/whitesur-home/.local/share/plasma/look-and-feel/* /usr/share/plasma/look-and-feel/ 2>/dev/null || true
+fi
+if [ -d /tmp/whitesur-home/.local/share/plasma/desktoptheme ]; then
+  cp -r /tmp/whitesur-home/.local/share/plasma/desktoptheme/* /usr/share/plasma/desktoptheme/ 2>/dev/null || true
+fi
+# Kvantum themes
+if [ -d /tmp/whitesur-home/.config/Kvantum ]; then
+  cp -r /tmp/whitesur-home/.config/Kvantum/* /usr/share/Kvantum/ 2>/dev/null || true
+fi
 
-# Install WhiteSur Icon Theme (all variants, alternative colors)
+# WhiteSur Icons
 git clone --depth=1 https://github.com/vinceliuice/WhiteSur-icon-theme.git /tmp/WhiteSur-icon-theme
 bash /tmp/WhiteSur-icon-theme/install.sh -a -d /usr/share/icons
 
-# Install WhiteSur Cursors
+# WhiteSur Cursors
 git clone --depth=1 https://github.com/vinceliuice/WhiteSur-cursors.git /tmp/WhiteSur-cursors
 install -d /usr/share/icons
 if [ -d /tmp/WhiteSur-cursors/dist ]; then
@@ -35,7 +56,7 @@ elif [ -x /tmp/WhiteSur-cursors/install.sh ]; then
   bash /tmp/WhiteSur-cursors/install.sh || true
 fi
 
-# Install WhiteSur SDDM Theme (login screen)
+# WhiteSur SDDM Theme (login screen)
 git clone https://github.com/nicefaa6waa9/sddm-whitesur-theme.git /tmp/WhiteSur-sddm \
   || git clone https://github.com/nicofaa99/sddm-whiteSur-theme.git /tmp/WhiteSur-sddm \
   || true
@@ -45,9 +66,27 @@ if [ -d /tmp/WhiteSur-sddm ]; then
 fi
 
 # Clean up temporary theme clones
-rm -rf /tmp/WhiteSur-kde /tmp/WhiteSur-icon-theme /tmp/WhiteSur-cursors /tmp/WhiteSur-sddm
+rm -rf /tmp/WhiteSur-kde /tmp/WhiteSur-icon-theme /tmp/WhiteSur-cursors /tmp/WhiteSur-sddm /tmp/whitesur-home
 
-# Activate WhiteSur SDDM login theme as system default (only if the theme exists)
+# Debug: list what was actually installed
+echo "=== WhiteSur install verification ==="
+ls /usr/share/aurorae/themes/ 2>/dev/null || echo "No aurorae themes"
+ls /usr/share/plasma/look-and-feel/ | grep -i white || echo "No WhiteSur LAF"
+ls /usr/share/plasma/desktoptheme/ | grep -i white || echo "No WhiteSur desktop theme"
+ls /usr/share/color-schemes/ | grep -i white || echo "No WhiteSur color schemes"
+ls /usr/share/icons/ | grep -i white || echo "No WhiteSur icons"
+ls /usr/share/Kvantum/ | grep -i white || echo "No WhiteSur Kvantum"
+echo "=== end verification ==="
+
+# ──────────────────────────────────────────────────────────────────────────────
+# PHASE 3: Copy rootfs overlay AFTER package installs (includes os-release)
+# ──────────────────────────────────────────────────────────────────────────────
+cp -a /tmp/build_files/rootfs/. /
+
+# Reset HOME
+export HOME=/root
+
+# Activate WhiteSur SDDM login theme
 if [ -d /usr/share/sddm/themes/WhiteSur ]; then
   install -d /usr/lib/sddm/sddm.conf.d
   cat > /usr/lib/sddm/sddm.conf.d/10-luhoodos.conf <<'EOF'
@@ -62,14 +101,19 @@ EnableHiDPI=true
 EOF
 fi
 
-# Activate LuhoodOS Plymouth boot splash if assets are present
+# Activate LuhoodOS Plymouth boot splash
 if [ -d /usr/share/plymouth/themes/luhoodos ]; then
   plymouth-set-default-theme luhoodos || true
 fi
 
+# Copy splash spinner from Fedora theme
 install -d /usr/share/plasma/look-and-feel/org.luhoodos.desktop/contents/splash/images
-cp /usr/share/plasma/look-and-feel/org.fedoraproject.fedoradark.desktop/contents/splash/images/busywidget.svgz /usr/share/plasma/look-and-feel/org.luhoodos.desktop/contents/splash/images/busywidget.svgz
+cp /usr/share/plasma/look-and-feel/org.fedoraproject.fedoradark.desktop/contents/splash/images/busywidget.svgz \
+   /usr/share/plasma/look-and-feel/org.luhoodos.desktop/contents/splash/images/busywidget.svgz
 
+# ──────────────────────────────────────────────────────────────────────────────
+# PHASE 4: LuhoodOS metadata
+# ──────────────────────────────────────────────────────────────────────────────
 install -d /usr/share/luhoodos
 
 cat > /usr/share/luhoodos/manifest.json <<'EOF'
@@ -96,13 +140,4 @@ cat > /usr/share/luhoodos/onboarding-defaults.json <<'EOF'
     "launcher": "spotlight-style"
   }
 }
-EOF
-
-cat > /usr/share/luhoodos/next-steps.txt <<'EOF'
-LuhoodOS image scaffold installed.
-
-Next implementation tasks:
-- add Standard and NVIDIA image split
-- add onboarding and Luhood Control
-- validate bootc switch/rebase on a test system
 EOF
