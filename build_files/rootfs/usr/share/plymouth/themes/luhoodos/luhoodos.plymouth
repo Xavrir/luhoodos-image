@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=LuhoodOS
+Description=LuhoodOS boot splash
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/luhoodos
+ScriptFile=/usr/share/plymouth/themes/luhoodos/luhoodos.script

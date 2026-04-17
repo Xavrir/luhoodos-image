@@ -1,24 +1,32 @@
 [kdeglobals][KDE]
-widgetStyle=Breeze
+widgetStyle=kvantum
 
 [kdeglobals][General]
-ColorScheme=BreezeDark
+ColorScheme=WhiteSurDark
 
 [kdeglobals][Icons]
-Theme=breeze-dark
+Theme=WhiteSur-dark
 
 [kdeglobals][KDE]
 LookAndFeelPackage=org.luhoodos.desktop
 
 [plasmarc][Theme]
-name=default
+name=WhiteSur-dark
 
 [kcminputrc][Mouse]
-cursorTheme=breeze_cursors
+cursorTheme=WhiteSur-cursors
 
 [kwinrc][org.kde.kdecoration2]
-library=org.kde.breeze
-theme=Breeze
+library=org.kde.kwin.aurorae
+theme=WhiteSur-dark-solid
+
+[kwinrc][Windows]
+BorderlessMaximizedWindows=false
+ButtonsOnLeft=XIA
+ButtonsOnRight=
+
+[kwinrc][Plugins]
+magiclampEnabled=true
 
 [KSplash]
 Theme=org.luhoodos.desktop

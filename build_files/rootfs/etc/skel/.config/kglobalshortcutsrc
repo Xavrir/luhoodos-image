@@ -1,0 +1,7 @@
+[krunner.desktop]
+_k_friendly_name=KRunner
+_launch=Meta+Space,Alt+Space,Alt+F2,Search
+
+[plasmashell]
+_k_friendly_name=Plasma
+show-on-mouse-pos=Meta+Space\tAlt+Space

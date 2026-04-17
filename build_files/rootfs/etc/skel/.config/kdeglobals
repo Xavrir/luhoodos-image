@@ -2,12 +2,15 @@
 LookAndFeelPackage=org.luhoodos.desktop
 SingleClick=false
 WelcomeShown=true
+widgetStyle=kvantum
+AnimationDurationFactor=0.6
 
 [Icons]
-Theme=breeze-dark
+Theme=WhiteSur-dark
 
 [General]
-ColorScheme=BreezeDark
+ColorScheme=WhiteSurDark
 
 [KSplash]
 Theme=org.luhoodos.desktop
+Engine=KSplashQML

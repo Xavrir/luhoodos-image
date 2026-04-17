@@ -1,0 +1,25 @@
+// LuhoodOS Plymouth boot splash
+Window.SetBackgroundTopColor(0.043, 0.063, 0.125);
+Window.SetBackgroundBottomColor(0.113, 0.145, 0.278);
+
+logo.image = Image("logo.png");
+logo.sprite = Sprite(logo.image);
+logo.width = logo.image.GetWidth();
+logo.height = logo.image.GetHeight();
+logo.x = Window.GetWidth() / 2 - logo.width / 2;
+logo.y = Window.GetHeight() / 2 - logo.height / 2 - 30;
+logo.sprite.SetPosition(logo.x, logo.y, 10);
+logo.sprite.SetOpacity(1.0);
+
+fun refresh_callback() {
+    return;
+}
+
+Plymouth.SetRefreshFunction(refresh_callback);
+
+progress = 0;
+fun progress_callback(duration, progress_value) {
+    progress = progress_value;
+}
+
+Plymouth.SetBootProgressFunction(progress_callback);
