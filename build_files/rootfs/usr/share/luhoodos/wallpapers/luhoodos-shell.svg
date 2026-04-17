@@ -1,46 +1,47 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3840 2160" role="img" aria-label="LuhoodOS wallpaper">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3840 2160" role="img" aria-label="LuhoodOS Tahoe-inspired wallpaper">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#0b1020" />
-      <stop offset="45%" stop-color="#111a33" />
-      <stop offset="100%" stop-color="#1d2547" />
+      <stop offset="0%" stop-color="#d8eefc"/>
+      <stop offset="22%" stop-color="#b8daf6"/>
+      <stop offset="56%" stop-color="#8aaedc"/>
+      <stop offset="100%" stop-color="#5d689a"/>
     </linearGradient>
-    <radialGradient id="glowA" cx="25%" cy="18%" r="55%">
-      <stop offset="0%" stop-color="#88d6ff" stop-opacity="0.50" />
-      <stop offset="55%" stop-color="#88d6ff" stop-opacity="0.10" />
-      <stop offset="100%" stop-color="#88d6ff" stop-opacity="0" />
+    <radialGradient id="orbA" cx="18%" cy="16%" r="38%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.72"/>
+      <stop offset="55%" stop-color="#dff4ff" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#dff4ff" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="glowB" cx="78%" cy="80%" r="45%">
-      <stop offset="0%" stop-color="#ffc88a" stop-opacity="0.22" />
-      <stop offset="60%" stop-color="#ffc88a" stop-opacity="0.06" />
-      <stop offset="100%" stop-color="#ffc88a" stop-opacity="0" />
+    <radialGradient id="orbB" cx="84%" cy="82%" r="34%">
+      <stop offset="0%" stop-color="#ffd8ef" stop-opacity="0.28"/>
+      <stop offset="55%" stop-color="#ffd8ef" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#ffd8ef" stop-opacity="0"/>
     </radialGradient>
-    <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#7bdcff" stop-opacity="0" />
-      <stop offset="50%" stop-color="#7bdcff" stop-opacity="0.55" />
-      <stop offset="100%" stop-color="#7bdcff" stop-opacity="0" />
+    <linearGradient id="glassLine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="48%" stop-color="#e9fbff" stop-opacity="0.58"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
     </linearGradient>
   </defs>
 
-  <rect width="3840" height="2160" fill="url(#bg)" />
-  <rect width="3840" height="2160" fill="url(#glowA)" />
-  <rect width="3840" height="2160" fill="url(#glowB)" />
+  <rect width="3840" height="2160" fill="url(#bg)"/>
+  <rect width="3840" height="2160" fill="url(#orbA)"/>
+  <rect width="3840" height="2160" fill="url(#orbB)"/>
 
-  <g fill="none" stroke="url(#line)" stroke-width="6">
-    <path d="M-160 1460C420 1080 980 1040 1560 1360S2700 1820 4000 1260" />
-    <path d="M-120 1580C480 1180 1000 1160 1540 1460S2700 1900 3980 1390" opacity="0.55" />
-    <path d="M-180 1320C360 980 940 940 1490 1230S2660 1700 3990 1120" opacity="0.28" />
+  <g fill="none" stroke="url(#glassLine)" stroke-width="10">
+    <path d="M-120 1480C540 980 1180 980 1850 1420s1310 460 2150 10"/>
+    <path d="M-80 1610C560 1090 1200 1080 1840 1500s1290 430 2140 40" opacity="0.68"/>
+    <path d="M-150 1360C470 900 1120 900 1790 1320s1340 430 2190 0" opacity="0.35"/>
   </g>
 
-  <g fill="none" stroke="#ffffff" stroke-opacity="0.08">
-    <circle cx="580" cy="520" r="300" stroke-width="2" />
-    <circle cx="580" cy="520" r="420" stroke-width="1.5" />
-    <circle cx="3040" cy="1620" r="220" stroke-width="2" />
-    <circle cx="3040" cy="1620" r="340" stroke-width="1.5" />
+  <g fill="none" stroke="#ffffff" stroke-opacity="0.18">
+    <circle cx="620" cy="560" r="250" stroke-width="2"/>
+    <circle cx="620" cy="560" r="390" stroke-width="1.5"/>
+    <circle cx="3180" cy="1710" r="210" stroke-width="2"/>
+    <circle cx="3180" cy="1710" r="330" stroke-width="1.5"/>
   </g>
 
-  <g transform="translate(420 1660)">
-    <rect x="0" y="0" width="760" height="6" rx="3" fill="#88d6ff" fill-opacity="0.35" />
-    <rect x="0" y="26" width="420" height="6" rx="3" fill="#88d6ff" fill-opacity="0.20" />
+  <g transform="translate(390 1670)">
+    <rect x="0" y="0" width="740" height="8" rx="4" fill="#ffffff" fill-opacity="0.35"/>
+    <rect x="0" y="30" width="430" height="8" rx="4" fill="#d7f6ff" fill-opacity="0.22"/>
   </g>
 </svg>

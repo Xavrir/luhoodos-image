@@ -56,6 +56,21 @@ elif [ -x /tmp/WhiteSur-cursors/install.sh ]; then
   bash /tmp/WhiteSur-cursors/install.sh || true
 fi
 
+# KDE icon aliases WhiteSur does not ship by default.
+# Without these, Plasma dock entries for KDE apps fall back to question-mark icons.
+for theme in WhiteSur WhiteSur-dark WhiteSur-light; do
+  install -d "/usr/share/icons/${theme}/apps/scalable"
+  if [ -f "/usr/share/icons/${theme}/places/scalable/folder.svg" ]; then
+    ln -sf ../../places/scalable/folder.svg "/usr/share/icons/${theme}/apps/scalable/org.kde.dolphin.svg"
+  fi
+  if [ -f "/usr/share/icons/${theme}/apps/22/preferences.svg" ]; then
+    install -d "/usr/share/icons/${theme}/apps/22"
+    ln -sf preferences.svg "/usr/share/icons/${theme}/apps/22/preferences-system.svg"
+    ln -sf preferences.svg "/usr/share/icons/${theme}/apps/22/systemsettings.svg"
+    ln -sf preferences-desktop-theme-global.svg "/usr/share/icons/${theme}/apps/22/plasmadiscover.svg" 2>/dev/null || true
+  fi
+done
+
 # WhiteSur SDDM Theme (login screen)
 git clone https://github.com/nicefaa6waa9/sddm-whitesur-theme.git /tmp/WhiteSur-sddm \
   || git clone https://github.com/nicofaa99/sddm-whiteSur-theme.git /tmp/WhiteSur-sddm \

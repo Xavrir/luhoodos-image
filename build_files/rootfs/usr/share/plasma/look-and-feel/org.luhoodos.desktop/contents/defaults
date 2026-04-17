@@ -13,6 +13,9 @@ LookAndFeelPackage=org.luhoodos.desktop
 [plasmarc][Theme]
 name=WhiteSur-dark
 
+[Wallpaper]
+Image=file:///usr/share/luhoodos/wallpapers/luhoodos-shell.svg
+
 [kcminputrc][Mouse]
 cursorTheme=WhiteSur-cursors
 
